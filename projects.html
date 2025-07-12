@@ -7,222 +7,8 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    .projects-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      justify-content: center;
-      margin: 40px 0 60px 0;
-    }
-    .project {
-      width: 340px;
-      background: #fff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-      cursor: pointer;
-      transition: transform 0.18s;
-      text-align: center;
-    }
-    .project:hover {
-      transform: translateY(-6px) scale(1.02);
-    }
-    .project img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-    .project h3 {
-      margin: 18px 0;
-      font-size: 1.1em;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
-    .gallery-view {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      margin: 40px 0 60px 0;
-      transition: opacity 0.4s;
-    }
-    .gallery-view.active {
-      display: flex;
-    }
-    .gallery-view.fading-out {
-      opacity: 0;
-    }
-    .gallery-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
-      max-width: 900px;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      margin-left: 32px;
-    }
-    .back-arrow-btn {
-      background: none;
-      border: none;
-      color: #111;
-      font-size: 1.15em;
-      font-weight: 400;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      padding: 0 2px 0 0;
-      margin: 0;
-      outline: none;
-      box-shadow: none;
-      line-height: 1;
-      height: 28px;
-      transition: background 0.2s;
-    }
-    .back-arrow-btn:active, .back-arrow-btn:focus {
-      background: none;
-      outline: none;
-    }
-    .gallery-title {
-      font-size: 1.15em;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-      margin: 0;
-      padding: 0;
-      text-align: left;
-      flex: 1;
-      color: #111;
-      line-height: 1.2;
-      user-select: text;
-      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      height: 28px;
-    }
-    .gallery-images {
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      align-items: center;
-    }
-    .gallery-images img {
-      width: 98vw;
-      max-width: 1200px;
-      cursor: pointer;
-      border-radius: 12px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-      object-fit: cover;
-    }
-    .back-btn {
-      margin: 32px 0 0 0;
-      align-self: flex-start;
-      background: none;
-      border: none;
-      color: #111;
-      font-size: 2em;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 400;
-      box-shadow: none;
-      outline: none;
-      transition: background 0.2s;
-      padding: 0 0 0 4px;
-    }
-    .back-btn:active, .back-btn:focus {
-      background: none;
-      outline: none;
-    }
-    .back-btn span {
-      font-size: 1.1em;
-      font-weight: 400;
-      margin-right: 8px;
-      display: flex;
-      align-items: center;
-      user-select: none;
-    }
-    /* Modal styles */
-    .img-modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.92);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 99999;
-      width: 100vw;
-      height: 100vh;
-      padding: 0;
-      margin: 0;
-    }
-    .img-modal-overlay.active {
-      display: flex;
-    }
-    .img-modal-content {
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      padding: 40px;
-      box-sizing: border-box;
-      margin: 0;
-    }
-    .img-modal-content img {
-      max-width: 80vw;
-      max-height: 76vh;
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 2px 32px rgba(0,0,0,0.5);
-      background: #fff;
-      display: block;
-    }
-    .img-modal-close {
-      position: absolute;
-      top: 16px;
-      right: 32px;
-      color: #fff;
-      font-size: 2.5em;
-      cursor: pointer;
-      z-index: 10001;
-      background: none;
-      border: none;
-      font-weight: 300;
-    }
-    .img-modal-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #fff;
-      font-size: 2.5em;
-      cursor: pointer;
-      z-index: 10001;
-      background: none;
-      border: none;
-      font-weight: 300;
-      padding: 0 16px;
-      opacity: 0.7;
-      transition: opacity 0.2s;
-      user-select: none;
-    }
-    .img-modal-arrow:hover {
-      opacity: 1;
-    }
-    .img-modal-arrow.left {
-      left: 0;
-    }
-    .img-modal-arrow.right {
-      right: 0;
-    }
-
-  </style>
+  
+  <!-- Removed internal <style> block to prevent CSS conflicts -->
 </head>
 <body>
   <div class="page-wrapper">
@@ -251,124 +37,124 @@
     <div class="projects-container" id="projectsGrid">
       <div class="project" data-project="Bianchi Ilios | Developer X">
         <img src="projects/Bianchi Ilios | Developer X/1.avif" alt="Bianchi Ilios | Developer X" loading="lazy">
-        <h3>Bianchi Ilios | Developer X</h3>
       </div>
+      <div class="project-title">Bianchi Ilios | Developer X</div>
       <div class="project" data-project="173 North Coast | The Waterway">
         <img src="projects/173 North Coast | The Waterway/1.avif" alt="173 North Coast | The Waterway" loading="lazy">
-        <h3>173 North Coast | The Waterway</h3>
       </div>
+      <div class="project-title">173 North Coast | The Waterway</div>
       <div class="project" data-project="Aeon | Matchado-Silvetti">
         <img src="projects/Aeon | Matchado-Silvetti/1.avif" alt="Aeon | Matchado-Silvetti" loading="lazy">
-        <h3>Aeon | Matchado-Silvetti</h3>
       </div>
+      <div class="project-title">Aeon | Matchado-Silvetti</div>
       <div class="project" data-project="Azailya | Sodic">
         <img src="projects/Azailya | Sodic/1.avif" alt="Azailya | Sodic" loading="lazy">
-        <h3>Azailya | Sodic</h3>
       </div>
+      <div class="project-title">Azailya | Sodic</div>
       <div class="project" data-project="Baymount | Maven">
         <img src="projects/Baymount | Maven/1.avif" alt="Baymount | Maven" loading="lazy">
-        <h3>Baymount | Maven</h3>
       </div>
+      <div class="project-title">Baymount | Maven</div>
       <div class="project" data-project="Cairo Gate | Emaar">
         <img src="projects/Cairo Gate | Emaar/1.avif" alt="Cairo Gate | Emaar" loading="lazy">
-        <h3>Cairo Gate | Emaar</h3>
       </div>
+      <div class="project-title">Cairo Gate | Emaar</div>
       <div class="project" data-project="Cali-Coast | Maven">
         <img src="projects/Cali-Coast | Maven/1.avif" alt="Cali-Coast | Maven" loading="lazy">
-        <h3>Cali-Coast | Maven</h3>
       </div>
+      <div class="project-title">Cali-Coast | Maven</div>
       <div class="project" data-project="Campus | Marakez">
         <img src="projects/Campus | Marakez/1.avif" alt="Campus | Marakez" loading="lazy">
-        <h3>Campus | Marakez</h3>
       </div>
+      <div class="project-title">Campus | Marakez</div>
       <div class="project" data-project="City Gate | Qatari Diar">
         <img src="projects/City Gate | Qatari Diar/1.avif" alt="City Gate | Qatari Diar" loading="lazy">
-        <h3>City Gate | Qatari Diar</h3>
       </div>
+      <div class="project-title">City Gate | Qatari Diar</div>
       <div class="project" data-project="District 5 | Marakez">
         <img src="projects/District 5 | Marakez/1.avif" alt="District 5 | Marakez" loading="lazy">
-        <h3>District 5 | Marakez</h3>
       </div>
+      <div class="project-title">District 5 | Marakez</div>
       <div class="project" data-project="EDNC | SODIC">
         <img src="projects/EDNC | SODIC/1.avif" alt="EDNC | SODIC" loading="lazy">
-        <h3>EDNC | SODIC</h3>
       </div>
+      <div class="project-title">EDNC | SODIC</div>
       <div class="project" data-project="Gouna Golf | Orascom">
         <img src="projects/Gouna Golf | Orascom/1.avif" alt="Gouna Golf | Orascom" loading="lazy">
-        <h3>Gouna Golf | Orascom</h3>
       </div>
+      <div class="project-title">Gouna Golf | Orascom</div>
       <div class="project" data-project="Grenada | Ora">
         <img src="projects/Grenada | Ora/1.avif" alt="Grenada | Ora" loading="lazy">
-        <h3>Grenada | Ora</h3>
       </div>
+      <div class="project-title">Grenada | Ora</div>
       <div class="project" data-project="Jefaira | Inertia Properties">
         <img src="projects/Jefaira | Inertia Properties/1.avif" alt="Jefaira | Inertia Properties" loading="lazy">
-        <h3>Jefaira | Inertia Properties</h3>
       </div>
+      <div class="project-title">Jefaira | Inertia Properties</div>
       <div class="project" data-project="June Beach House | Sodic">
         <img src="projects/June Beach House | Sodic/1.avif" alt="June Beach House | Sodic" loading="lazy">
-        <h3>June Beach House | Sodic</h3>
       </div>
+      <div class="project-title">June Beach House | Sodic</div>
       <div class="project" data-project="Kardia New Capital | Capital Link">
         <img src="projects/Kardia New Capital | Capital Link/1.avif" alt="Kardia New Capital | Capital Link" loading="lazy">
-        <h3>Kardia New Capital | Capital Link</h3>
       </div>
+      <div class="project-title">Kardia New Capital | Capital Link</div>
       <div class="project" data-project="Karmell | Sodic">
         <img src="projects/Karmell | Sodic/1.avif" alt="Karmell | Sodic" loading="lazy">
-        <h3>Karmell | Sodic</h3>
       </div>
+      <div class="project-title">Karmell | Sodic</div>
       <div class="project" data-project="Majada | Iwan">
         <img src="projects/Majada | Iwan/1.avif" alt="Majada | Iwan" loading="lazy">
-        <h3>Majada | Iwan</h3>
       </div>
+      <div class="project-title">Majada | Iwan</div>
       <div class="project" data-project="Makadi Heights Downtown | Orascom Developments">
         <img src="projects/Makadi Heights Downtown | Orascom Developments/1.avif" alt="Makadi Heights Downtown | Orascom Developments" loading="lazy">
-        <h3>Makadi Heights Downtown | Orascom Developments</h3>
       </div>
+      <div class="project-title">Makadi Heights Downtown | Orascom Developments</div>
       <div class="project" data-project="Mindhaus | Marakez">
         <img src="projects/Mindhaus | Marakez/1.avif" alt="Mindhaus | Marakez" loading="lazy">
-        <h3>Mindhaus | Marakez</h3>
       </div>
+      <div class="project-title">Mindhaus | Marakez</div>
       <div class="project" data-project="O-West | Orascom">
         <img src="projects/O-West | Orascom/1.avif" alt="O-West | Orascom" loading="lazy">
-        <h3>O-West | Orascom</h3>
       </div>
+      <div class="project-title">O-West | Orascom</div>
       <div class="project" data-project="Ourika | Developer X">
         <img src="projects/Ourika | Developer X/1.avif" alt="Ourika | Developer X" loading="lazy">
-        <h3>Ourika | Developer X</h3>
       </div>
+      <div class="project-title">Ourika | Developer X</div>
       <div class="project" data-project="Signature Villa | Emaar">
         <img src="projects/Signature Villa | Emaar/1.avif" alt="Signature Villa | Emaar" loading="lazy">
-        <h3>Signature Villa | Emaar</h3>
       </div>
+      <div class="project-title">Signature Villa | Emaar</div>
       <div class="project" data-project="Sodic-East | SODIC">
         <img src="projects/Sodic-East | SODIC/1.avif" alt="Sodic-East | SODIC" loading="lazy">
-        <h3>Sodic-East | SODIC</h3>
       </div>
+      <div class="project-title">Sodic-East | SODIC</div>
       <div class="project" data-project="Soul | Emaar">
         <img src="projects/Soul | Emaar/1.avif" alt="Soul | Emaar" loading="lazy">
-        <h3>Soul | Emaar</h3>
       </div>
+      <div class="project-title">Soul | Emaar</div>
       <div class="project" data-project="Swan Lake North Coast | Hassan Allam">
         <img src="projects/Swan Lake North Coast | Hassan Allam/1.avif" alt="Swan Lake North Coast | Hassan Allam" loading="lazy">
-        <h3>Swan Lake North Coast | Hassan Allam</h3>
       </div>
+      <div class="project-title">Swan Lake North Coast | Hassan Allam</div>
       <div class="project" data-project="The Estates | Sodic">
         <img src="projects/The Estates | Sodic/1.avif" alt="The Estates | Sodic" loading="lazy">
-        <h3>The Estates | Sodic</h3>
       </div>
+      <div class="project-title">The Estates | Sodic</div>
       <div class="project" data-project="W-Residence | One Ninety | LMD">
         <img src="projects/W-Residence | One Ninety | LMD/1.avif" alt="W-Residence | One Ninety | LMD" loading="lazy">
-        <h3>W-Residence | One Ninety | LMD</h3>
       </div>
+      <div class="project-title">W-Residence | One Ninety | LMD</div>
       <div class="project" data-project="Zed-East | Ora">
         <img src="projects/Zed-East | Ora/1.avif" alt="Zed-East | Ora" loading="lazy">
-        <h3>Zed-East | Ora</h3>
       </div>
+      <div class="project-title">Zed-East | Ora</div>
       <div class="project" data-project="Zed-West | WATG | Ora">
         <img src="projects/Zed-West | WATG | Ora/1.avif" alt="Zed-West | WATG | Ora" loading="lazy">
-        <h3>Zed-West | WATG | Ora</h3>
       </div>
+      <div class="project-title">Zed-West | WATG | Ora</div>
     </div>
 
     <div class="gallery-view" id="galleryView">
